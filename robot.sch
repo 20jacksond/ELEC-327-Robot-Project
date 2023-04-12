@@ -13225,7 +13225,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="1.0u"/>
 <part name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1u"/>
 <part name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1u"/>
-<part name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2"/>
 <part name="X_10" library="ngspice-simulation" library_urn="urn:adsk.eagle:library:527439" deviceset="GND" device=""/>
 <part name="X_11" library="ngspice-simulation" library_urn="urn:adsk.eagle:library:527439" deviceset="GND" device=""/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="4.7k"/>
@@ -13293,10 +13292,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="C4" gate="G$1" x="134.62" y="-35.56" smashed="yes">
 <attribute name="NAME" x="135.636" y="-34.925" size="1.778" layer="95"/>
 <attribute name="VALUE" x="135.636" y="-39.751" size="1.778" layer="96"/>
-</instance>
-<instance part="C5" gate="G$1" x="137.16" y="20.32" smashed="yes">
-<attribute name="NAME" x="138.176" y="20.955" size="1.778" layer="95"/>
-<attribute name="VALUE" x="138.176" y="16.129" size="1.778" layer="96"/>
 </instance>
 <instance part="X_10" gate="G$1" x="-48.26" y="60.96" smashed="yes"/>
 <instance part="X_11" gate="G$1" x="33.02" y="60.96" smashed="yes"/>
