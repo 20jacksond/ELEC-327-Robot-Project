@@ -2073,6 +2073,12 @@ design rules under a new name.</description>
 <wire x1="43.18" y1="66.04" x2="45.4" y2="66.04" width="0.254" layer="1"/>
 <wire x1="45.4" y1="66.04" x2="46.99" y2="64.45" width="0.254" layer="1"/>
 </signal>
+<signal name="N$5">
+<via x="14.986" y="31.496" extent="1-16" drill="0.2"/>
+</signal>
+<signal name="N$6">
+<via x="14.986" y="30.48" extent="1-16" drill="0.2"/>
+</signal>
 </signals>
 <mfgpreviewcolors>
 <mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
