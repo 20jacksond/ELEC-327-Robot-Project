@@ -8,6 +8,15 @@ is within the frame
 import cv2 as cv
 import numpy as np
 import math
+import Adafruit_BBI0.GPI0 as GPI0
+
+#initialize 2 pins as output (1 for each header)
+#stop/go, GPI0_117
+stopgo = "P9_25"
+GPI0.setup(stopgo, GPI0.OUT)
+#right/left, GPI0_115
+turn = "P9_27"
+GPI0.setup(turn, GPI0.OUT)
 
 video = cv.VideoCapture("video0")
 
@@ -19,14 +28,6 @@ while(1):
     #identify blue range
     blue = cv.inRange(hsvframe, (0,100,0), (50,185,255))
 
-    #header will be the value that we send off to determine where to go
-    #0 -- keep going, 1 -- stop
-    header_stop = 0
-    #value will correspond to angle at which we have to turn
-    #full left: 180, full right: 0, straight ahead: 90
-    #this value will be sent no matter what, but should only be checked
-    #if header_stop = 1
-    header_turn = 0
     #find the center of the frame
     center_x = blue.shape[0] // 2
     center_y = blue.shape[1] // 2
@@ -58,14 +59,21 @@ while(1):
                 blue_in_frame += 1
                 blue_on_right += 1
     
-    #if there's likely tape here, stop
+    #if there's likely tape here
     if blue_in_frame >= 500:
-        header_stop = 1
+        #stop
+        GPI0.output(stopgo, GPI0.HIGH)
+    else:
+        #keep going
+        GPI0.output(stopgo, GPI0.LOW)
 
+    #if more blue on right than left
     if blue_on_right >= blue_on_left:
-        header_turn = 135
-    elif blue_on_right < blue_on_left:
-        header_turn = 45
+        #turn left
+        GPI0.output(turn, GPI0.HIGH)
+    else:
+        #turn right
+        GPI0.output(turn, GPI0.LOW)
     
     cv.waitKey(10)
     cv.destroyAllWindows()
