@@ -8,15 +8,15 @@ is within the frame
 import cv2 as cv
 import numpy as np
 import math
-import Adafruit_BBI0.GPI0 as GPI0
+import Adafruit_BBIO.GPIO as GPIO
 
 #initialize 2 pins as output (1 for each header)
 #stop/go, GPI0_117
 stopgo = "P9_25"
-GPI0.setup(stopgo, GPI0.OUT)
+GPIO.setup(stopgo, GPIO.OUT)
 #right/left, GPI0_115
 turn = "P9_27"
-GPI0.setup(turn, GPI0.OUT)
+GPIO.setup(turn, GPIO.OUT)
 
 video = cv.VideoCapture("video0")
 
@@ -24,9 +24,10 @@ while(1):
 
     #read in frame and convert to HSV
     _ , frame = video.read()
+    #print(frame.shape)
     hsvframe = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     #identify blue range
-    blue = cv.inRange(hsvframe, (0,100,0), (50,185,255))
+    blue = cv.inRange(hsvframe, (100,100,20), (140,255,255))
 
     #find the center of the frame
     center_x = blue.shape[0] // 2
@@ -40,8 +41,8 @@ while(1):
     blue_on_right = 0
 
     #for each pixel in the middle of the frame
-    for i in range(0,200):
-        for j in range(0,200):
+    for i in range(0,100):
+        for j in range(0,100):
             #check top left corner
             if blue[center_x-i, center_y-j] == 255:
                 blue_in_frame += 1
@@ -60,20 +61,24 @@ while(1):
                 blue_on_right += 1
     
     #if there's likely tape here
-    if blue_in_frame >= 500:
+    if blue_in_frame >= 5000:
         #stop
-        GPI0.output(stopgo, GPI0.HIGH)
+        print("STOP")
+        GPIO.output(stopgo, GPIO.HIGH)
     else:
         #keep going
-        GPI0.output(stopgo, GPI0.LOW)
+        print("keep going")
+        GPIO.output(stopgo, GPIO.LOW)
 
     #if more blue on right than left
     if blue_on_right >= blue_on_left:
         #turn left
-        GPI0.output(turn, GPI0.HIGH)
+        print("left")
+        GPIO.output(turn, GPIO.HIGH)
     else:
         #turn right
-        GPI0.output(turn, GPI0.LOW)
+        print("right")
+        GPIO.output(turn, GPIO.LOW)
     
-    cv.waitKey(10)
+    cv.waitKey(1)
     cv.destroyAllWindows()
